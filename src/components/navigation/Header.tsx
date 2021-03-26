@@ -15,6 +15,8 @@ const useStyles = createUseStyles(({ colors }: Theme) => ({
   header: {
     minHeight: "50px",
     background: "#fff",
+    borderBottom: "3px solid orange",
+    // boxShadow: "1px -10px 27px 2px rgba(0,0,0,0.3)",
   },
 }));
 

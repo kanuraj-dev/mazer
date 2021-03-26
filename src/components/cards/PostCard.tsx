@@ -1,15 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { createUseStyles } from "react-jss";
-import DemoProfileImg from "../../assets/demo-images/demo-profile-img.svg";
-import DemoPostImg from "../../assets/demo-images/demo-post-img.svg";
 import {
   LikeOutlined,
   MessageOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
 
-function PostCard() {
+const truncateString = (string: string, maxLength = 50) => {
+  if (!string) return null;
+  if (string.length <= maxLength) return string;
+  return `${string.substring(0, maxLength)}...`;
+};
+
+const isCaptionLong = (caption: string, maxLength = 90) => {
+  if (!caption) return null;
+  if (caption.length <= maxLength) return false;
+  return true;
+};
+
+type PostCardProps = {
+  post_id: any;
+  author_img: any;
+  author_name: any;
+  author_username: any;
+  post_time: any;
+  post_image: any;
+  post_caption: any;
+  likes: any;
+  comments: any;
+};
+
+function PostCard({
+  post_id,
+  author_img,
+  author_name,
+  author_username,
+  post_time,
+  post_image,
+  post_caption,
+  likes,
+  comments,
+}: PostCardProps) {
   const classes = useStyles();
+  const [showMore, setShowMore] = useState(false);
 
   return (
     <div className={classes.postCardWrapper}>
@@ -17,19 +50,30 @@ function PostCard() {
         <div className={classes.postCardHeader}>
           <img
             className={classes.headerProfileImg}
-            src={DemoProfileImg}
+            src={author_img}
             alt="author profile img"
           />
           <div>
-            <div className={classes.authorName}>Albert Patel</div>
-            <div className={classes.postTime}>12 March 2021 at 10:43 AM</div>
+            <div className={classes.authorName}>{author_name}</div>
+            <div className={classes.postTime}>{post_time}</div>
           </div>
         </div>
-        <img className={classes.postImage} src={DemoPostImg} alt="post img" />
+        <img className={classes.postImage} src={post_image} alt="post img" />
         <div className={classes.postCaption}>
-          <strong>alberto_232</strong>
-          {"  "} Hey, look at this and tell me your opinion about this. is it
-          good enough to showcase in my portfolio?😅
+          <strong>{author_username}</strong>
+          {/* truncate string if caption is long */}
+          {showMore ? post_caption : truncateString(post_caption, 90)}
+
+          {/* show "hide/more buttons only if caption is long enough" */}
+          {isCaptionLong(post_caption) && (
+            <span
+              className={classes.showMoreLessBtn}
+              onClick={() => setShowMore(!showMore)}
+            >
+              {/* change text  */}
+              {showMore ? "Show Less" : "Show More"}
+            </span>
+          )}
         </div>
         <div className={classes.postActions}>
           <div className={classes.actionBtn}>
@@ -84,6 +128,19 @@ const useStyles = createUseStyles(({ colors }: Theme) => ({
   postCaption: {
     fontWeight: "600",
     padding: "0.7rem 1.5rem 0 1.5rem ",
+    color: "grey",
+
+    "& strong": {
+      color: "#111",
+      paddingRight: "5px",
+      opacity: "0.85",
+    },
+  },
+  showMoreLessBtn: {
+    color: "brown",
+    paddingLeft: "5px",
+    fontWeight: "500",
+    cursor: "pointer",
   },
   postActions: {
     padding: "1rem 1.5rem",
