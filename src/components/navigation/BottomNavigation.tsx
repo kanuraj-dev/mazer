@@ -51,7 +51,7 @@ function BottomNavigation() {
 const useStyles = createUseStyles(({ colors }: Theme) => ({
   bottomNavigation: {
     width: "100%",
-    minHeight: "50px",
+    height: "60px",
     background: "#fff",
     position: "fixed",
     bottom: "0",
@@ -64,7 +64,14 @@ const useStyles = createUseStyles(({ colors }: Theme) => ({
     fontSize: "1.4rem",
   },
   navItem: {
+    width: "7rem",
+    height: "40px",
     color: "#030303",
+    transition: "all .5s",
+    padding: "0.3rem 1rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
 
     "& $navText": {
       display: "none",
@@ -72,18 +79,13 @@ const useStyles = createUseStyles(({ colors }: Theme) => ({
   },
   navText: {
     fontWeight: "600",
-    fontSize: "1.2rem",
+    fontSize: "1rem",
     paddingLeft: "5px",
   },
   activeNavItem: {
-    width: "7rem",
-    padding: "0.3rem 1rem",
+    color: "#fff",
     borderRadius: "2.5rem",
     background: "#40e0d0",
-    color: "#fff",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
 
     "& $navText": {
       display: "flex",
