@@ -1,4 +1,3 @@
-import { Tabs } from "antd";
 import { createUseStyles } from "react-jss";
 import {
   BellOutlined,
@@ -7,8 +6,6 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-
-const { TabPane } = Tabs;
 
 function BottomNavigation() {
   const classes = useStyles();
