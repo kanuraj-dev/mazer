@@ -12,7 +12,7 @@ function UserItemCard({ image, username, name }: UserItemCardProps) {
 
   return (
     <div className={classes.userItemCard}>
-      <img className={classes.userImg} src={image} alt="User image" />
+      <img className={classes.userImg} src={image} alt="User Profile" />
       <div>
         <div className={classes.userName}>{username}</div>
         <div className={classes.name}>{name}</div>
